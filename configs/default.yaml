@@ -1,0 +1,45 @@
+# Default experiment configuration for sfc-autoscale.
+# Run with:  sfc-autoscale run --config configs/default.yaml --verbose
+
+seed: 0
+
+simulation:
+  num_steps: 48          # control-loop ticks (e.g. 48 half-hours = 1 day)
+  retrain_every: 10      # refit the predictor every N ticks (closed loop)
+  k_paths: 5             # K-CMP candidate paths
+  bw_cost_per_unit: 1.0
+
+topology:
+  type: sample           # 'sample' (10-node core) or 'fat_tree'
+  num_nodes: 10
+
+workload:
+  type: diurnal_spike    # constant | diurnal | spike | random_walk | diurnal_spike
+  amplitude: 0.5
+  noise: 0.04
+
+predictor:
+  backend: gru_numpy     # gru_numpy | gru_torch | last_value | moving_average | exp_smoothing
+  window_size: 20        # Paper 2 finds T=20 near-optimal
+  hidden_size: 16
+  epochs: 60
+  lr: 0.02
+
+scaling:
+  change_threshold: 0.05 # ignore traffic moves under 5%
+  h_out_replicas: 1
+  cost:
+    deploy_new_vnf: 10.0
+    per_cpu_unit: 1.0
+    downtime_per_ms: 0.5
+    migration: 15.0
+    load_balancer: 3.0
+    restart_ms: 500.0
+    migrate_ms: 1000.0
+
+# Optional: override the request set. Omit to use the built-in default set.
+requests:
+  - {id: R1, data_rate: 100, ingress: N0, egress: N9, chain: [NAT, FW, TM, VOC, IDPS], max_delay: 500, revenue: 1000}
+  - {id: R2, data_rate: 64,  ingress: N0, egress: N4, chain: [NAT, FW, TM],            max_delay: 300, revenue: 800}
+  - {id: R3, data_rate: 120, ingress: N1, egress: N9, chain: [NAT, FW, VOC, IDPS],     max_delay: 400, revenue: 1500}
+  - {id: R4, data_rate: 50,  ingress: N3, egress: N7, chain: [NAT, FW, TM],            max_delay: 350, revenue: 600}

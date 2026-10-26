@@ -1,0 +1,4 @@
+policy,predictor,violation_steps,request_violations,worst_recovery_steps,mean_delay_satisfaction,total_actions
+static,—,94,161,19,0.5611,0
+reactive,—,63,77,7,0.7944,216
+proactive,NumpyGRUPredictor,17,20,7,0.9528,221

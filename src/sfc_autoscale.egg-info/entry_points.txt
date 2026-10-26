@@ -1,0 +1,2 @@
+[console_scripts]
+sfc-autoscale = sfc_autoscale.cli:main

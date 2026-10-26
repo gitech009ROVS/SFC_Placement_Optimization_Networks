@@ -1,0 +1,9 @@
+# Core (always required) — keeps the simulator free and runnable anywhere.
+numpy>=1.24
+networkx>=3.0
+pyyaml>=6.0
+
+# Optional extras (install as needed):
+#   pip install -e ".[torch]"   # real PyTorch GRU
+#   pip install -e ".[plot]"    # plotting / CSV export
+#   pip install -e ".[dev]"     # tests + linting
