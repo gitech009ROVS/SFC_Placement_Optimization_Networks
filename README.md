@@ -220,7 +220,3 @@ The GRU's backprop is verified against numerical gradients (max relative error
 | `prediction/` GRU + sliding window T=20 | Paper 2, Sec. IV |
 | closed-loop retraining | Paper 2 |
 | `scaling/` 6-action engine | new contribution |
-
-## License
-
-MIT.
