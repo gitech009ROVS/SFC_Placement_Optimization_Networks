@@ -211,12 +211,3 @@ The GRU's backprop is verified against numerical gradients (max relative error
 
 ---
 
-## Mapping to the papers
-
-| Component | Source |
-|---|---|
-| `core/delay.py` contention model | Paper 1, Eqs. 4–10 |
-| `placement/` CEF-PS, K-CMP, DAVE | Paper 1, Sec. IV |
-| `prediction/` GRU + sliding window T=20 | Paper 2, Sec. IV |
-| closed-loop retraining | Paper 2 |
-| `scaling/` 6-action engine | new contribution |
